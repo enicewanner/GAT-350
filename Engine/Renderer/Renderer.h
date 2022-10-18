@@ -2,6 +2,8 @@
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "Math/Matrix3x3.h"
+#include "glad/glad.h"
+#include "SDL.h"
 
 struct SDL_Renderer;
 struct SDL_Window;
@@ -47,6 +49,8 @@ namespace neu
 	private:
 		int m_width = 0;
 		int m_height = 0;
+
+		SDL_GLContext m_context;
 
 		Color m_clearColor{ 0, 0, 0, 255 };
 

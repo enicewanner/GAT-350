@@ -1,9 +1,9 @@
-#pragma once
-#include "Resource/Resource.h"
-#include "Renderer/Renderer.h"
-#include "Math/MathUtils.h"
-#include <map>
-#include <vector>
+#pragma once 
+#include "Resource/Resource.h" 
+#include "Renderer.h" 
+#include "Math/MathUtils.h" 
+#include <map> 
+#include <vector> 
 
 namespace neu
 {

@@ -20,6 +20,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Build\Assets\Materials\box.mtrl">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="..\Build\Assets\Shaders\basic.prog">
       <Filter>Resource Files</Filter>
     </None>
@@ -29,7 +32,7 @@
     <None Include="..\Build\Assets\Shaders\basic.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Build\Assets\Materials\box.mtrl">
+    <None Include="..\Build\Assets\Materials\box1.mtrl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

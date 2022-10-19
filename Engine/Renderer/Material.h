@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "Resource/Resource.h" 
 #include "Math/MathUtils.h" 
 #include <vector> 

@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-#include <glm/glm.hpp>
+#include <glm\glm.hpp>
 #include <glm/gtx/compatibility.hpp>
 #include <glm/gtx/norm.hpp>
 #include <glm/vec2.hpp>
@@ -18,7 +18,6 @@ namespace math
 	constexpr float Pi = 3.14159265359f; // 180
 	constexpr float TwoPi = 6.28318530718f; // 360
 	constexpr float HalfPi = 1.57079632679f; // 90
-
 
 	constexpr float DegToRad(float degrees)
 	{

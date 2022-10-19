@@ -20,27 +20,25 @@ namespace neu
 		g_eventManager.Initialize();
 	}
 
-	void Engine::Update()
-	{
-		g_time.Tick();
-		g_inputSystem.Update();
-		g_audioSystem.Update();
-		g_physicsSystem.Update();
-		g_eventManager.Update();
-	}
-
 	void Engine::Shutdown()
 	{
 		Factory::Instance().Shutdown();
 
-		g_renderer.Shutdown();
+		g_eventManager.Shutdown();
+		g_physicsSystem.Shutdown();
+		g_resources.Shutdown();
 		g_inputSystem.Shutdown();
 		g_audioSystem.Shutdown();
-		g_resources.Shutdown();
-		g_physicsSystem.Shutdown();
-		g_eventManager.Shutdown();
+		g_renderer.Shutdown();
+	}
 
-
+	void Engine::Update()
+	{
+		g_time.Tick();
+		g_eventManager.Update();
+		g_physicsSystem.Update();
+		g_inputSystem.Update();
+		g_audioSystem.Update();
 	}
 
 	void Engine::Register()

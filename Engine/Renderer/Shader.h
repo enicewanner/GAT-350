@@ -9,11 +9,9 @@ namespace neu
 	public:
 		~Shader();
 
-
 		virtual bool Create(std::string filename, ...) override;
-		
+
 	public:
 		GLuint m_shader = 0;
 	};
-
 }

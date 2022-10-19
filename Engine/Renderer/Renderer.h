@@ -3,7 +3,7 @@
 #include "Math/Color.h"
 #include "Math/Matrix3x3.h"
 #include "glad/glad.h"
-#include "SDL.h"
+#include <SDL.h>
 
 struct SDL_Renderer;
 struct SDL_Window;
@@ -50,8 +50,6 @@ namespace neu
 		int m_width = 0;
 		int m_height = 0;
 
-		SDL_GLContext m_context;
-
 		Color m_clearColor{ 0, 0, 0, 255 };
 
 		Matrix3x3 m_view;
@@ -59,5 +57,6 @@ namespace neu
 
 		SDL_Renderer* m_renderer = nullptr;
 		SDL_Window* m_window = nullptr;
+		SDL_GLContext m_context;
 	};
 }

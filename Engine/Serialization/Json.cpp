@@ -1,4 +1,4 @@
-	#include "Json.h"
+#include "Json.h"
 #include "rapidjson/istreamwrapper.h"
 #include "Core/Logger.h"
 #include "Math/Vector2.h"
@@ -244,7 +244,7 @@ namespace neu::json
 		if (!value.HasMember(name.c_str())) return false;
 
 		// check if 'name' member exists and is an array with 2 elements
-		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2)
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 3)
 		{
 			LOG("error reading json data %s", name.c_str());
 			return false;
@@ -272,7 +272,7 @@ namespace neu::json
 	{
 		if (!value.HasMember(name.c_str())) return false;
 
-		// check if 'name' member exists and is an array with 3 elements
+		// check if 'name' member exists and is an array with 2 elements
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 3)
 		{
 			LOG("error reading json data %s", name.c_str());
@@ -302,7 +302,7 @@ namespace neu::json
 		if (!value.HasMember(name.c_str())) return false;
 
 		// check if 'name' member exists and is an array with 2 elements
-		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 3)
 		{
 			LOG("error reading json data %s", name.c_str());
 			return false;

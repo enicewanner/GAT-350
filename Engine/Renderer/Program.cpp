@@ -31,8 +31,7 @@ namespace neu
 		READ_DATA(document, vertex_shader);
 		if (!vertex_shader.empty())
 		{
-
-			auto vshader = g_resources.Get<neu::Shader>(vertex_shader, GL_VERTEX_SHADER);
+			auto vshader = neu::g_resources.Get<neu::Shader>(vertex_shader, GL_VERTEX_SHADER);
 			AddShader(vshader);
 		}
 
@@ -41,23 +40,18 @@ namespace neu
 		READ_DATA(document, fragment_shader);
 		if (!fragment_shader.empty())
 		{
-
-			auto fshader = g_resources.Get<neu::Shader>(fragment_shader, (void*)GL_FRAGMENT_SHADER);
+			auto fshader = neu::g_resources.Get<neu::Shader>(fragment_shader, (void*)GL_FRAGMENT_SHADER);
 			AddShader(fshader);
 		}
 
-		Link();
-
 		return true;
 	}
-
 	void Program::AddShader(const std::shared_ptr<Shader>& shader)
 	{
 		m_shaders.push_back(shader);
 
 		glAttachShader(m_program, shader->m_shader);
 	}
-
 	void Program::Link()
 	{
 		// link shader programs 
@@ -109,43 +103,24 @@ namespace neu
 		if (uniform != -1)
 			glUniformMatrix4fv(uniform, 1, GL_FALSE, glm::value_ptr(value));
 	}
-
 	void Program::SetUniform(const std::string& name, int value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniform1i(uniform, value);
 	}
-
 	void Program::SetUniform(const std::string& name, unsigned int value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniform1i(uniform, value);
 	}
-
 	void Program::SetUniform(const std::string& name, bool value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniform1i(uniform, value);
 	}
-
 	void Program::SetUniform(const std::string& name, const glm::vec2& value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniform2fv(uniform, 1, &value[0]);
 	}
-
 	void Program::SetUniform(const std::string& name, const glm::vec4& value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniform4fv(uniform, 1, &value[0]);
 	}
-
 	void Program::SetUniform(const std::string& name, const glm::mat3& value)
 	{
-		GLint uniform = GetUniform(name);
-		if (uniform != -1) glUniformMatrix3fv(uniform, 1, GL_FALSE, glm::value_ptr(value));
 	}
-
 	GLint Program::GetUniform(const std::string& name)
 	{
 		// find uniform in map 

@@ -76,7 +76,7 @@ float vertices[] = {
 	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f
 };
 
-int main(int argc,char** argv)
+int main(int argc, char** argv)
 {
 	LOG("Application Started...");
 
@@ -95,7 +95,7 @@ int main(int argc,char** argv)
 	glGenBuffers(1, &pvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, pvbo);
 	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float), points, GL_STATIC_DRAW);
-	
+
 	//Color
 	GLuint cvbo = 0;
 	glGenBuffers(1, &cvbo);
@@ -112,7 +112,7 @@ int main(int argc,char** argv)
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices),vertices,GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	// create vertex array
 	GLuint vao = 0;
@@ -123,11 +123,11 @@ int main(int argc,char** argv)
 
 	glEnableVertexAttribArray(0);
 	//glBindBuffer(GL_ARRAY_BUFFER, pvbo);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8* sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 
 	glEnableVertexAttribArray(1);
 	//glBindBuffer(GL_ARRAY_BUFFER, cvbo);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	glEnableVertexAttribArray(2);
 	//glBindBuffer(GL_ARRAY_BUFFER, tvbo);
@@ -136,10 +136,10 @@ int main(int argc,char** argv)
 	// create shader
 	std::shared_ptr<neu::Shader> vs = neu::g_resources.Get<neu::Shader>("shaders/basic.vert", GL_VERTEX_SHADER);
 	std::shared_ptr<neu::Shader> fs = neu::g_resources.Get<neu::Shader>("shaders/basic.frag", GL_FRAGMENT_SHADER);
-	
+
 
 	// create program
-	std::shared_ptr<neu::Program> program = neu::g_resources.Get <neu::Program>("shaders/basic.prog",GL_PROGRAM);
+	std::shared_ptr<neu::Program> program = neu::g_resources.Get <neu::Program>("shaders/basic.prog", GL_PROGRAM);
 	program->Link();
 	program->Use();
 
@@ -153,8 +153,8 @@ int main(int argc,char** argv)
 	std::shared_ptr<neu::Material> material = neu::g_resources.Get<neu::Material>("materials/box1.mtrl");
 	material->Bind();
 
-		material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
-		material->GetProgram()->SetUniform("scale", 1.0f);
+	material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
+	material->GetProgram()->SetUniform("scale", 1.0f);
 
 
 
@@ -163,6 +163,20 @@ int main(int argc,char** argv)
 
 	glm::vec3 cameraPosition{ 0,0,2 };
 	float speed = 3;
+
+	std::vector<neu::Transform> transforms;
+	for (size_t i = 0; i < 10; i++)
+	{
+		transforms.push_back({ {neu::randomf(-10, 10), neu::randomf(-10, 10), neu::randomf(-10, 10)}, {neu::randomf(360), 90, 0} });
+	}
+
+	//neu::Transform transforms[] =
+	//{
+	//	{ {0, 0, 0}, {neu::randomf(-10, 10), neu::randomf(-10, 10), neu::randomf(-10, 10)}},
+	//	{ {0, 4, 0}, {45, 0, 0} },
+	//	{ {3, 0, -1}, {0, 30, 0} },
+	//	{ {1, 4, 2}, {0, 45, 0} },
+	//};
 
 	bool quit = false;
 	while (!quit)
@@ -182,19 +196,22 @@ int main(int argc,char** argv)
 
 		glm::mat4 view = glm::lookAt(cameraPosition, cameraPosition + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
 		//glm::mat4 view = glm::lookAt(cameraPosition, glm::vec3{ 0,0,0 }, glm::vec3{ 0,1,0 });
-		model = glm::eulerAngleXYZ(0.0f, neu::g_time.time, 0.0f);
-		glm::mat4 mvp = projection * view * model;
-
-
-		//program->SetUniform("scale", std::sin(neu::g_time.time * 3));
-		program->SetUniform("mvp", mvp);
+		//model = glm::eulerAngleXYZ(0.0f, neu::g_time.time, 0.0f);
 
 
 
 		neu::g_renderer.BeginFrame();
 
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		vb->Draw();
+		for (size_t i = 0; i < transforms.size(); i++)
+		{
+			transforms[i].rotation += glm::vec3{ 0, 90 * neu::g_time.deltaTime, 0 };
+
+			glm::mat4 mvp = projection * view * (glm::mat4)transforms[i];
+			program->SetUniform("mvp", mvp);
+			vb->Draw();
+
+		}
+
 
 		neu::g_renderer.EndFrame();
 	}

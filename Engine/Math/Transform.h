@@ -21,9 +21,14 @@ namespace neu
 			scale{ scale } 
 		{}
 
+		//not sure if correct, check this later
+		glm::vec3 getRight() { return ((glm::mat4)(*this))[0]; }
+		glm::vec3 getUp() { return ((glm::mat4)(*this))[1]; }
+		glm::vec3 getForward() { return ((glm::mat4)(*this))[2]; }
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
+
 
 		void Update()
 		{
@@ -35,6 +40,7 @@ namespace neu
 
 			matrix = parent * (glm::mat4)*this;
 		}
+		
 
 		operator glm::mat4 () const
 		{

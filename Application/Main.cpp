@@ -117,7 +117,7 @@ int main(int argc, char** argv)
 		transform.push_back({ {0,0,-2 }, { 0,90,0 } });
 	}
 
-	auto m = neu::g_resources.Get<neu::Model>("models/ogre.obj");
+		auto m = neu::g_resources.Get<neu::Model>("models/ogre.obj");
 
 
 	bool quit = false;
@@ -142,7 +142,6 @@ int main(int argc, char** argv)
 		glm::mat4 view = glm::lookAt(cameraPosition, cameraPosition + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
 		//model = glm::eulerAngleXYZ(0.0f, neu::g_time.time, 0.0f);
 
-		scene->Update();
 
 		neu::g_renderer.BeginFrame();
 
@@ -155,6 +154,7 @@ int main(int argc, char** argv)
 			m->m_vertexBuffer.Draw();
 		}
 
+		scene->Update();
 		scene->Draw(neu::g_renderer);
 
 		neu::g_renderer.EndFrame();

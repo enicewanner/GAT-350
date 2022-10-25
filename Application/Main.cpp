@@ -61,19 +61,21 @@ int main(int argc, char** argv)
 
 
 	// load scene 
-	auto scene = std::make_unique<neu::Scene>();
+	//auto scene = std::make_unique<neu::Scene>();
 
-	rapidjson::Document document;
-	bool success = neu::json::Load("scenes/basic.scn", document);
-	if (!success)
-	{
-		LOG("error loading scene file %s.", "scenes/basic.scn");
-	}
-	else
-	{
-		scene->Read(document);
-		scene->Initialize();
-	}
+	//rapidjson::Document document;
+	//bool success = neu::json::Load("scenes/basic.scn", document);
+	//if (!success)
+	//{
+	//	LOG("error loading scene file %s.", "scenes/basic.scn");
+	//}
+	//else
+	//{
+	//	scene->Read(document);
+	//	scene->Initialize();
+	//}
+
+	auto scene = neu::g_resources.Get<neu::Scene>("scenes/basic.scn");
 
 	std::shared_ptr<neu::VertexBuffer> vb = neu::g_resources.Get<neu::VertexBuffer>("box");
 	vb->CreateVertexBuffer(sizeof(vertices), 36, vertices);

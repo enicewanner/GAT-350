@@ -60,6 +60,26 @@ namespace neu
 		m_actors.clear();
 	}
 
+	bool Scene::Create(std::string name, ...)
+	{
+		// load scene 
+		auto scene = std::make_unique<neu::Scene>();
+
+		rapidjson::Document document;
+		bool success = neu::json::Load("scenes/basic.scn", document);
+		if (!success)
+		{
+			LOG("error loading scene file %s.", "scenes/basic.scn");
+		}
+		else
+		{
+			scene->Read(document);
+			scene->Initialize();
+		}
+
+		return true;
+	}
+
 	bool Scene::Write(const rapidjson::Value& value) const
 	{
 		return true;
